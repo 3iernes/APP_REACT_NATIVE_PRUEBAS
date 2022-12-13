@@ -5,10 +5,10 @@ export const validateSignUP = (obj) => {
         'password': null,
         'confirmPassword': null
     }
-    let allow = true
+    let correct = true
     //Veo si el nombre de usuario cumple con el minimo de 4 caracteres
     if (obj.user === null) {
-        allow = false
+        correct = false
         errors = {
             ...errors,
             'user': 'El nombre de usuario debe tener minimo 4 caracteres',
@@ -16,14 +16,14 @@ export const validateSignUP = (obj) => {
     }
     //Veo si ingreso las contraseñas
     if (obj.password === null) {
-        allow = false
+        correct = false
         errors = {
             ...errors,
             'password': 'Este es un campo obligatorio',
         }
     } 
     if(obj.confirmPassword === null){
-        allow = false
+        correct = false
         errors = {
             ...errors,
             'confirmPassword': 'Este es un campo obligatorio',
@@ -31,7 +31,7 @@ export const validateSignUP = (obj) => {
     }
     if (!(obj.password === obj.confirmPassword)) {
         //Si ingreso algo, veo si puso bien el pass las 2 veces
-        allow = false
+        correct = false
         //Si lo puso mal, le muestro un msj de error
         errors = {
             ...errors,
@@ -39,6 +39,5 @@ export const validateSignUP = (obj) => {
             'confirmPassword': 'Los valores ingresados no son iguales',
         }
     }
-    console.log(obj.confirmPassword)
-    return [errors, allow]
+    return [errors, correct]
 }

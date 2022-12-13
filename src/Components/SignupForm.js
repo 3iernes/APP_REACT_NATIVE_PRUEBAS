@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Input, Button } from '@rneui/themed';
 import { createUser } from '../api/pruebasAPI';
 import { validateSignUP } from '../utilities/formsValidations';
+
 export default function SignupForm() {
     const [values, setValues] = useState({
         'user': null,
@@ -16,15 +17,16 @@ export default function SignupForm() {
     })
     const handlePress = async () => {
         try {
-            const [errors,allow] = validateSignUP(values)
+            const [errors,correct] = validateSignUP(values)
             setErrores(errors)
-            if(allow){
-                const response = await createUser(values)
+            if(correct){
+                //Si estan todos los datos bien, genero el hash del password
+                /*const response = await createUser(values)
                 if(response.status === 200){
                     //Registro exitoso
-                }
+                }*/
             }
-            console.log(errors,allow)
+            console.log(errors,correct)
         } catch (error) {
             console.log(`Error posteando datos usuario: ${error.message}`)
         }
